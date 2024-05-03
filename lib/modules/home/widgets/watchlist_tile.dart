@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:trading_app/models/live_data_model.dart';
 import 'package:trading_app/models/watchlist_model.dart';
 import 'package:trading_app/utils/global_constants.dart';
 import 'package:trading_app/utils/icon_constants.dart';
 
 class WatchlistTile extends StatelessWidget {
-  final WatchlistModel watchlist;
+  final LiveData liveData;
   final VoidCallback onDelete;
-  const WatchlistTile({super.key, required this.watchlist, required this.onDelete,});
+  const WatchlistTile({super.key, required this.liveData, required this.onDelete,});
 
   @override
   Widget build(BuildContext context) {
@@ -43,17 +44,17 @@ class WatchlistTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Text(watchlist.title),
+                  Text(liveData.title),
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text('${watchlist.isPositive ? '+' : '-'}${watchlist.pointChange} ', style: GoogleFonts.amaranth(
+                      Text('+120', style: GoogleFonts.amaranth(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
-                        color: watchlist.isPositive ? GlobalConstants.positiveColor : GlobalConstants.negativeColor,
+                        color: GlobalConstants.positiveColor,
                       )),
-                      Text('(+${watchlist.percentageChange}%)', style: GoogleFonts.amaranth(
+                      Text('(+.21%)', style: GoogleFonts.amaranth(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
                         color: GlobalConstants.hintColor,
@@ -72,7 +73,7 @@ class WatchlistTile extends StatelessWidget {
                   width: 56.56,
                   color: GlobalConstants.positiveColor.withOpacity(0.1),
                   child: Center(
-                    child: Text(watchlist.bidPrice, style: GoogleFonts.amaranth(
+                    child: Text(liveData.bid, style: GoogleFonts.amaranth(
                       fontWeight: FontWeight.w400,
                       fontSize: 13,
                       color: GlobalConstants.textPrimary,
@@ -100,7 +101,7 @@ class WatchlistTile extends StatelessWidget {
                   width: 56.56,
                   color: GlobalConstants.negativeColor.withOpacity(0.1),
                   child: Center(
-                    child: Text(watchlist.askPrice, style: GoogleFonts.amaranth(
+                    child: Text(liveData.ask, style: GoogleFonts.amaranth(
                       fontWeight: FontWeight.w400,
                       fontSize: 13,
                       color: GlobalConstants.textPrimary,
