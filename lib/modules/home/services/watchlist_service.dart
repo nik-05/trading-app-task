@@ -22,11 +22,16 @@ class WatchlistService {
     return _streamController;
   }
 
+
+  Map<String, dynamic> arr = {};
   void connectLiveData() {
     socket.on('liveData', (data) {
-      _streamController.add(data);
-      socket.disconnect();
-      socket.connect();
+      arr = data;
+      _streamController.add(arr);
+    });
+    socket.on('message', (data) {
+      arr[data["n"]] = data["p"];
+      _streamController.add(arr);
     });
   }
 
