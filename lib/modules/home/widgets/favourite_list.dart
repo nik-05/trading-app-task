@@ -85,6 +85,7 @@ class _FavouriteListState extends State<FavouriteList> {
                       return ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, index) {
+                          print(snapshot.data);
                           return WatchlistTile(
                             liveData: liveDataList[index],
                             onDelete:() {
